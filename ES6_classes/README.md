@@ -19,7 +19,7 @@
 
 ## Contributing
 
--- Santiago Yanguas - Holberton Student
+-- Sayyara Yusupova - Holberton Student
 
 ## Versioning
 
@@ -27,7 +27,7 @@ For my learning of backend web dev in Holberton School
 
 ## Authors
 
----Santiago Yanguas
+---By: Johann Kerbrat, Engineering Manager at Uber Works
 
 ## Files
 
