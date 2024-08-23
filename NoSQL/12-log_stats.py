@@ -1,26 +1,26 @@
 #!/usr/bin/env python3
-"""Write a Python script that provides some stats
-about Nginx logs stored in MongoDB:"""
+"""Log stats"""
 from pymongo import MongoClient
 
 
-def log_stats():
-    """log stats"""
-    client = MongoClient()
-    collection = client.logs.nginx
+def helper(a: dict) -> int:
+    """return log"""
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    logs = client.logs.nginx
+    return logs.count_documents(a)
 
-    total_log_count = collection.count_documents({})
-    print(f"{total_log_count} logs")
+
+def main():
+    """ provides some stats about Nginx logs stored in MongoDB """
+    print(f"{helper({})} logs")
     print("Methods:")
-    METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-
-    for method in METHODS:
-        meth = collection.count_documents({'method': method})
-        print(f"\tmethod {method}: {meth}")
-
-    status = collection.count_documents({"method": "GET", "path": "/status"})
-    print(f"{status} status check")
+    print(f"\tmethod GET: {helper({'method': 'GET'})}")
+    print(f"\tmethod POST: {helper({'method': 'POST'})}")
+    print(f"\tmethod PUT: {helper({'method': 'PUT'})}")
+    print(f"\tmethod PATCH: {helper({'method': 'PATCH'})}")
+    print(f"\tmethod DELETE: {helper({'method': 'DELETE'})}")
+    print(f"{helper({'method': 'GET', 'path': '/status'})} status check")
 
 
 if __name__ == "__main__":
-    log_stats()
+    main()
